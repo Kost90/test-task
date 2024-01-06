@@ -1,0 +1,10 @@
+.navbar_wrapped {
+  @apply w-full bg-slate-800;
+}
+
+.navbar_container {
+  @apply container flex justify-end items-center text-white font-semibold h-14;
+}
+.navbar_container button {
+  @apply bg-green-400 w-56 py-3 px-5 rounded-md hover:bg-green-600 duration-75;
+}/*# sourceMappingURL=Header.module.css.map */
