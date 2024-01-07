@@ -4,7 +4,7 @@ class API {
   }
 
   fetch({ path = "", method = "GET", body, signal, headers = {}, ...rest }) {
-    return fetch(`${this.baseUrl}/${path}`, {
+    return fetch(`${this.baseurl}${path}`, {
       method,
       signal,
       headers: {
