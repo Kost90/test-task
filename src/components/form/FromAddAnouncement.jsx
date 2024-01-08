@@ -1,28 +1,21 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { useAnnouncement, useDispatch } from "../../context/Anouncement";
 import { ANNOUNCE_ACTION_TYPES } from "../../context/AnouncementReducer";
-import MaptilerAPI from "../../api/API/MaptilerAPI";
+import { FilterKeys } from "./utils";
+import styles from "./FormAdd.module.css";
 
 function FromAddAnouncement() {
   const [newformdata, setNewFormdata] = useState(null);
   const dispatch = useDispatch();
   const data = useAnnouncement();
 
-  const handelSubmit = async (e) => {
+  const handelSubmit = useCallback(async (e) => {
     e.preventDefault();
-    const newdata = {};
-    const formdata = new FormData(e.target);
-    for (const [key, value] of formdata) {
-      if (key === "img") {
-        newdata[key] = URL.createObjectURL(value);
-      } else if (key === "geo") {
-        newdata[key] = await MaptilerAPI.getGeo(value);
-      } else {
-        newdata[key] = value;
-      }
-    }
-    setNewFormdata((prev) => (prev = newdata));
-  };
+    const data = new FormData(e.target);
+    const formdata = await FilterKeys(data);
+    setNewFormdata((prev) => (prev = formdata));
+    e.target.reset();
+  }, []);
 
   useEffect(() => {
     if (newformdata !== null) {
@@ -32,7 +25,6 @@ function FromAddAnouncement() {
         payload: {
           id: data.length + 1,
           img: newformdata.img,
-          text: newformdata.text,
           geo: newformdata.geo.features[0].geometry.coordinates,
         },
       });
@@ -40,15 +32,23 @@ function FromAddAnouncement() {
   }, [newformdata]);
 
   return (
-    <div>
-      <form onSubmit={handelSubmit}>
-        <label>Write name of car</label>
-        <input type="text" name="text" />
-        <label>Add picture</label>
-        <input type="file" name="img" accept="image/*" />
-        <label>Write search</label>
-        <input type="text" name="geo" />
-        <button type="submit">Submit</button>
+    <div className="flex flex-col items-center gap-3">
+      <h1 className="font-semibold uppercase">Додати оголошення</h1>
+      <form onSubmit={handelSubmit} className={styles.form}>
+        <label>Введіть місто:</label>
+        <input type="text" name="city" placeholder="місто" />
+        <label>Введіть назву вулиці:</label>
+        <input type="text" name="street" placeholder="вулиця" />
+        <label>Введіть номер будинку/будівлі:</label>
+        <input type="text" name="number" placeholder="номер" />
+        <label>Додати фото</label>
+        <input
+          type="file"
+          name="img"
+          accept="image/*"
+          className={styles.input_file}
+        />
+        <button type="submit">Додати</button>
       </form>
     </div>
   );

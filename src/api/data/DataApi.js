@@ -5,7 +5,7 @@ export const data = [
   {
     id:1,
     img: '/grahame-jenkins-p7tai9P7H-s-unsplash.jpg',
-    text: "BMW",
+    // text: "BMW",
     geo:[50.450 ,30.523],
   },
 ];
