@@ -14,9 +14,12 @@ function CardList() {
   }, [data]);
 
   return (
+    <div className="max-h-screen w-20%">
     <div className={styles.cardlist_container}>
       <Card data={carddata} />
     </div>
+    </div>
+    
   );
 }
 

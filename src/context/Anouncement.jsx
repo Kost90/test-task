@@ -2,8 +2,6 @@ import { createContext, useContext, useReducer } from 'react';
 import { AnnounceReducer } from './AnouncementReducer';
 import { data } from '../api/data/DataApi';
 
-// const initialTasks = []
-
 export const AnnouncementContext = createContext(null);
 const AnnounceDispatchContext = createContext(null);
 
