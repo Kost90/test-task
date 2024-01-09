@@ -49,7 +49,6 @@ function Map() {
           DrawInitMap(map, el.id, el.geo, contextData);
         });
       });
-      setIsMapLoaded(true);
       map.current.on("click", "unclustered-point", function (e) {
         const id = e.features[0].id;
         handelChange(id);
