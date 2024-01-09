@@ -8,7 +8,7 @@ function RootLayout() {
   return (
     <div>
         <Header/>
-        <div className="flex">
+        <div className="flex lg:flex-row flex-col w-full">
         <Sidebar/>
         <Outlet/>
         <CardList/>

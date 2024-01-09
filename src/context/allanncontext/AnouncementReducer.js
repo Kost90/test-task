@@ -1,6 +1,4 @@
-export const ANNOUNCE_ACTION_TYPES = {
-  addAnnounce: "ADD_ANNOUNCE",
-};
+import { ANNOUNCE_ACTION_TYPES } from "./types";
 
 export const AnnounceReducer = (announcement, action) => {
   switch (action.type) {
