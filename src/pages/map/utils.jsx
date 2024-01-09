@@ -4,6 +4,16 @@ export const FilterAnnouncement = (data, id) => {
   return result;
 };
 
+export const FilterCardList = (layers, data) => {
+  let Arr = [...data];
+  let newShowArr = [];
+  layers.forEach((element) => {
+    newShowArr = Arr.filter((el) => el.id === element.id);
+  });
+  console.log(newShowArr);
+  return newShowArr;
+};
+
 export const DrawInitMap = (mapref, id, geo, contextData) => {
   if (mapref.current.getSource("places")) {
     const element = FilterAnnouncement(contextData, id);
@@ -39,8 +49,8 @@ export const DrawInitMap = (mapref, id, geo, contextData) => {
         ],
       },
       cluster: true,
-      clusterMaxZoom: 14,
-      clusterRadius: 50,
+      clusterMaxZoom: 9,
+      clusterRadius: 30,
     });
     mapref.current.addLayer({
       id: "clusters",

@@ -6,6 +6,7 @@ import { useAnnouncement } from "../../context/allanncontext/Anouncement.jsx";
 import { useSingleDispatch } from "../../context/singleannounc/Singleannounce";
 import { SINGLANN_ACTION_TYPES } from "../../context/singleannounc/types.js";
 import { DrawInitMap, clickHandler } from "./utils.jsx";
+import useMapClick from "../../hooks/usemapclick/useMapClick.jsx";
 
 const API_key = import.meta.env.VITE_API_KEY;
 
@@ -13,13 +14,14 @@ maptilersdk.config.apiKey = `${API_key}`;
 
 function Map() {
   const contextData = useAnnouncement();
-  const [clikeId, setClickedID] = useState(null);
+  const { clickeId, handelChange } = useMapClick();
   const mapContainer = useRef(null);
   const map = useRef(null);
   const kiev = { lng: 30.523, lat: 50.45 };
-  const [zoom] = useState(5);
+  const [zoom, setZoom] = useState(5);
   const disptach = useSingleDispatch();
 
+  // initialize the map
   useEffect(() => {
     if (map.current) return;
     map.current = new maptilersdk.Map({
@@ -30,14 +32,16 @@ function Map() {
     });
   }, [contextData, zoom, kiev.lat, kiev.lng]);
 
+  // initial draw the map
   useEffect(() => {
     if (map.current.loaded()) {
       const newArr = [...contextData];
       const lastElem = newArr.slice(-1);
+
       DrawInitMap(map, lastElem[0].id, lastElem[0].geo, contextData);
       map.current.on("click", "unclustered-point", function (e) {
         const id = e.features[0].id;
-        setClickedID(id);
+        handelChange(id);
       });
     } else {
       map.current.on("load", function () {
@@ -45,23 +49,25 @@ function Map() {
           DrawInitMap(map, el.id, el.geo, contextData);
         });
       });
+      setIsMapLoaded(true);
       map.current.on("click", "unclustered-point", function (e) {
         const id = e.features[0].id;
-        setClickedID(id);
+        handelChange(id);
       });
     }
   }, [contextData]);
 
+  // added clicked layer to the cardlist
   useEffect(() => {
-    if (clikeId !== null) {
+    if (clickeId !== null) {
       clickHandler(
-        clikeId,
+        clickeId,
         contextData,
         disptach,
         SINGLANN_ACTION_TYPES.addSinglAnn
       );
     }
-  }, [clikeId]);
+  }, [clickeId]);
 
   return (
     <>

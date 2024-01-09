@@ -12,6 +12,9 @@ export const AnnounceReducer = (announcement, action) => {
         },
       ];
     }
+    case ANNOUNCE_ACTION_TYPES.changeAnnounce:{
+      return action.payload;
+    }
     default: {
       throw new Error(`Unknown action type ${action.type}`);
     }
