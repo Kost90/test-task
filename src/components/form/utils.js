@@ -13,9 +13,7 @@ export const FilterKeys = async (data) => {
   }
   const geostring = geo.join(" ");
   const geoLocation = await MaptilerAPI.getGeo(geostring);
-  console.log(data)
   dataObject = {
-    // id:Number(data.length +1),
     ...newdata,
     geo: geoLocation,
   };
