@@ -1,3 +1,3 @@
 .cardlist_container {
-  @apply max-h-screen w-20% bg-slate-200 flex flex-col items-center justify-center border-r-2 p-5 gap-5 overflow-auto;
+  @apply bg-slate-200 flex flex-col items-center justify-start border-r-2 p-5 gap-5 overflow-y-auto h-full;
 }/*# sourceMappingURL=CardList.module.css.map */

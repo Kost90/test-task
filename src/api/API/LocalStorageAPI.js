@@ -10,6 +10,14 @@ class LocalStarageAPI extends API {
     return JSON.parse(localStorage.getItem("data"));
   }
 
+  getSinglData({ id }) {
+    const data = JSON.parse(localStorage.getItem("data"));
+    const newId = Number(id.id);
+    const newArrya = [...data];
+    const result = newArrya.filter((el) => el.id === newId);
+    return result;
+  }
+
   setData(newdata) {
     if (newdata !== null) {
       localStorage.setItem("data", JSON.stringify(newdata));

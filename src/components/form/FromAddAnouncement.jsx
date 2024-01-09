@@ -19,11 +19,11 @@ function FromAddAnouncement() {
 
   useEffect(() => {
     if (newformdata !== null) {
-      console.log(newformdata.geo);
+      const id = Number(data.length + 1);
       dispatch({
         type: ANNOUNCE_ACTION_TYPES.addAnnounce,
         payload: {
-          id: data.length + 1,
+          id: id,
           img: newformdata.img,
           geo: newformdata.geo.features[0].geometry.coordinates,
         },
