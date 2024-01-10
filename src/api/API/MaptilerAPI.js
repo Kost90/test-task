@@ -6,7 +6,7 @@ class MaptilerAPI {
       language: [maptilersdk.geocoding.language.UKRAINIAN],
       country: ["UA"],
     });
-
+    console.log(response)
     return response;
   }
 }

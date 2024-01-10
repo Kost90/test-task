@@ -7,6 +7,7 @@ import { useSingleDispatch } from "../../context/singleannounc/Singleannounce";
 import { SINGLANN_ACTION_TYPES } from "../../context/singleannounc/types.js";
 import { DrawInitMap, clickHandler } from "./utils.jsx";
 import useMapClick from "../../hooks/usemapclick/useMapClick.jsx";
+import useGetLayers from "./useGetLayers.jsx";
 
 const API_key = import.meta.env.VITE_API_KEY;
 
@@ -20,16 +21,23 @@ function Map() {
   const kiev = { lng: 30.523, lat: 50.45 };
   const [zoom, setZoom] = useState(5);
   const disptach = useSingleDispatch();
+  const { zoomLeve, bbox, handelChangeZoom, handelChangeBbox } =
+    useGetLayers(map);
+  // const [zoomLeve, setZoomLevel] = useState(0);
 
   // initialize the map
   useEffect(() => {
-    if (map.current) return;
-    map.current = new maptilersdk.Map({
-      container: mapContainer.current,
-      style: maptilersdk.MapStyle.STREETS,
-      center: [kiev.lng, kiev.lat],
-      zoom: zoom,
-    });
+    if (map.current) {
+      return;
+    }
+    {
+      map.current = new maptilersdk.Map({
+        container: mapContainer.current,
+        style: maptilersdk.MapStyle.STREETS,
+        center: [kiev.lng, kiev.lat],
+        zoom: zoom,
+      });
+    }
   }, [contextData, zoom, kiev.lat, kiev.lng]);
 
   // initial draw the map
@@ -37,8 +45,13 @@ function Map() {
     if (map.current.loaded()) {
       const newArr = [...contextData];
       const lastElem = newArr.slice(-1);
-
-      DrawInitMap(map, lastElem[0].id, lastElem[0].geo, contextData);
+      DrawInitMap(
+        map,
+        lastElem[0].id,
+        lastElem[0].geo,
+        lastElem[0].bbox,
+        contextData
+      );
       map.current.on("click", "unclustered-point", function (e) {
         const id = e.features[0].id;
         handelChange(id);
@@ -46,8 +59,14 @@ function Map() {
     } else {
       map.current.on("load", function () {
         contextData.forEach((el) => {
-          DrawInitMap(map, el.id, el.geo, contextData);
+          DrawInitMap(map, el.id, el.geo, el.bbox, contextData);
         });
+      });
+      map.current.on("zoom", function () {
+        const currentZoom = map.current.getZoom();
+        const currentBbox = map.current.getBounds();
+        handelChangeZoom(currentZoom);
+        handelChangeBbox(currentBbox);
       });
       map.current.on("click", "unclustered-point", function (e) {
         const id = e.features[0].id;

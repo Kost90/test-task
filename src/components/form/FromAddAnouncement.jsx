@@ -25,7 +25,8 @@ function FromAddAnouncement() {
         payload: {
           id: id,
           img: newformdata.img,
-          geo: newformdata.geo.features[0].geometry.coordinates,
+          geo: newformdata.geo,
+          bbox: newformdata.bbox,
         },
       });
     }
