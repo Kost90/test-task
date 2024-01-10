@@ -10,6 +10,9 @@ export const SingleAnnReducer = (singlann, action) => {
         },
       ];
     }
+    case SINGLANN_ACTION_TYPES.addShowingLayers: {
+      return action.payload;
+    }
     default: {
       throw new Error(`Unknown action type ${action.type}`);
     }

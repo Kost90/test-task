@@ -21,9 +21,7 @@ function Map() {
   const kiev = { lng: 30.523, lat: 50.45 };
   const [zoom, setZoom] = useState(5);
   const disptach = useSingleDispatch();
-  const { zoomLeve, bbox, handelChangeZoom, handelChangeBbox } =
-    useGetLayers(map);
-  // const [zoomLeve, setZoomLevel] = useState(0);
+  const { handelChangeZoom, handelChangeBbox, layers } = useGetLayers(map);
 
   // initialize the map
   useEffect(() => {
@@ -85,7 +83,7 @@ function Map() {
         SINGLANN_ACTION_TYPES.addSinglAnn
       );
     }
-  }, [clickeId]);
+  }, [clickeId, layers]);
 
   return (
     <>
