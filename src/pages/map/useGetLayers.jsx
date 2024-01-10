@@ -48,7 +48,7 @@ function useGetLayers(mapref) {
         payload: emptyArr,
       });
     }
-  }, [zoomLeve]);
+  }, [zoomLeve, bbox]);
 
   useEffect(() => {
     const zoomThreshold = 0.1;
