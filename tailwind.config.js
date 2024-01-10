@@ -9,6 +9,9 @@ export default {
       width:{
         '20%':'20%',
         '60%':'60%',
+      },
+      height:{
+        '300px':'300px',
       }
     },
     container: {
