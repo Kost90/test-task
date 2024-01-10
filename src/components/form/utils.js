@@ -15,7 +15,8 @@ export const FilterKeys = async (data) => {
   const geoLocation = await MaptilerAPI.getGeo(geostring);
   dataObject = {
     ...newdata,
-    geo: geoLocation,
+    geo: geoLocation.features[0].geometry.coordinates,
+    bbox:geoLocation.features[0].bbox,
   };
   return dataObject;
 };

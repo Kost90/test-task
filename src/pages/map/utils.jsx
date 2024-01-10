@@ -10,11 +10,10 @@ export const FilterCardList = (layers, data) => {
   layers.forEach((element) => {
     newShowArr = Arr.filter((el) => el.id === element.id);
   });
-  console.log(newShowArr);
   return newShowArr;
 };
 
-export const DrawInitMap = (mapref, id, geo, contextData) => {
+export const DrawInitMap = (mapref, id, geo, bbox, contextData) => {
   if (mapref.current.getSource("places")) {
     const element = FilterAnnouncement(contextData, id);
     const source = mapref.current.getSource("places");
@@ -28,6 +27,7 @@ export const DrawInitMap = (mapref, id, geo, contextData) => {
           geometry: {
             type: "Point",
             coordinates: element[0].geo,
+            bbox:element[0].bbox,
           },
         },
       ],
@@ -44,12 +44,13 @@ export const DrawInitMap = (mapref, id, geo, contextData) => {
             geometry: {
               type: "Point",
               coordinates: geo,
+              bbox: bbox,
             },
           },
         ],
       },
       cluster: true,
-      clusterMaxZoom: 9,
+      clusterMaxZoom: 10,
       clusterRadius: 30,
     });
     mapref.current.addLayer({

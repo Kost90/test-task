@@ -9,6 +9,7 @@ export const AnnounceReducer = (announcement, action) => {
           id: action.payload.id,
           img: action.payload.img,
           geo: action.payload.geo,
+          bbox:action.payload.bbox,
         },
       ];
     }
