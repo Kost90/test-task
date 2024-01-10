@@ -22,7 +22,7 @@ export default function Card({ data }) {
             </div>
           ))
         : null}
-      {announce.length !== 0
+      {announce.length !== 0 && announce
         ? announce.map((el) => (
             <div key={el.id} className={styles.flexcontainer}>
               <h1>{el.text}</h1>

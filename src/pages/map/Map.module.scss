@@ -3,5 +3,5 @@
 }
 
 .map {
-    @apply absolute w-full h-full max-h-screen;
+    @apply absolute w-full h-full max-h-screen overflow-y-visible;
 }
