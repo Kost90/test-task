@@ -1,0 +1,6 @@
+.map_container {
+    @apply w-full h-full;
+}
+.map {
+    @apply absolute w-full h-300px md:h-full max-h-screen !overflow-y-visible;
+}

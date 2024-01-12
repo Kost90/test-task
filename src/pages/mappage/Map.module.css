@@ -1,0 +1,4 @@
+.map_wrapper {
+  @apply relative h-300px md:min-h-screen lg:max-h-screen w-full lg:w-60%;
+}
+ /*# sourceMappingURL=Map.module.css.map */
