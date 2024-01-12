@@ -1,14 +1,13 @@
-import React from 'react'
-import { useLoaderData, Link } from 'react-router-dom';
+import React from "react";
+import { useLoaderData, Link } from "react-router-dom";
 
 function AnnounceDetails() {
-    const announce = useLoaderData()
-    console.log(announce)
- 
- 
-    return (
+  const announce = useLoaderData();
+  console.log(announce);
+
+  return (
     <div className="w-full block overflow-y-scroll max-h-screen">
-        {announce.length !== 0
+      {announce.length !== 0
         ? announce.map((el) => (
             <div
               key={el.id}
@@ -26,7 +25,7 @@ function AnnounceDetails() {
           ))
         : null}
     </div>
-  )
+  );
 }
 
-export default AnnounceDetails
+export default AnnounceDetails;

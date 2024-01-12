@@ -1,7 +1,7 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import RootLayout from "../layouts/RootLayout";
 import { PageNotFound } from "../pages/pagenotfound/PageNotFound";
-import Map from "../pages/map/Map";
+import Mappage from "../pages/mappage/Mappage";
 import AnnounceDetails from "../pages/announcedetails/AnnounceDetails";
 import { AnnounceDetailsLoader } from "../pages/announcedetails/AnnounceDetailsLoader";
 
@@ -13,7 +13,7 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <Map />,
+        element: <Mappage />,
       },
       {
         path:'announce/:id',

@@ -25,7 +25,6 @@ function useGetLayers(mapref) {
       } else return;
     });
     setLayers((prev) => (prev = filteredArr));
-    console.log(filteredArr);
   }, []);
 
   const handelChangeZoom = useCallback((data) => {
@@ -38,23 +37,16 @@ function useGetLayers(mapref) {
 
   useEffect(() => {
     const zoomThreshold = 0.1;
-    console.log(bbox)
     if (Math.abs(zoomLeve - 12) < zoomThreshold && layers.length === 0) {
       FilterLayer(context, bbox);
     } else if (Math.abs(zoomLeve - 8) < zoomThreshold && layers.length !== 0) {
-      console.log("true");
       const emptyArr = [];
-      setLayers([])
+      setLayers([]);
       disptach({
         type: SINGLANN_ACTION_TYPES.addShowingLayers,
         payload: emptyArr,
       });
-    }
-  }, [zoomLeve]);
-
-  useEffect(() => {
-    const zoomThreshold = 0.1;
-    if (Math.abs(zoomLeve - 12) < zoomThreshold && layers.length !== 0) {
+    } else if (Math.abs(zoomLeve - 12) < zoomThreshold && layers.length !== 0) {
       disptach({
         type: SINGLANN_ACTION_TYPES.addShowingLayers,
         payload: layers,
