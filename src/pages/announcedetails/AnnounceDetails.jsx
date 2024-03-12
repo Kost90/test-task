@@ -3,7 +3,6 @@ import { useLoaderData, Link } from "react-router-dom";
 
 function AnnounceDetails() {
   const announce = useLoaderData();
-  console.log(announce);
 
   return (
     <div className="w-full block overflow-y-scroll max-h-screen">
